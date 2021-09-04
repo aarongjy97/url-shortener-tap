@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as dotenv from "dotenv";
 import { connect, connection } from "mongoose";
-import { handleCreateURL } from './handleCreateUrl';
-import { responseBuilder } from './util/responsebuilder';
+import { handleCreateURL } from './util/handleCreateUrl';
+import { responseBuilder } from './util/responseBuilder';
 
 dotenv.config();
 const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI;
