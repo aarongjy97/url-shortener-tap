@@ -1,7 +1,6 @@
-
 import * as dotenv from 'dotenv';
 import { connect, connection } from 'mongoose';
-import { deconflictURL, generateShortenedURL, saveURL, searchExistingURL } from '../app';
+import { deconflictURL, generateShortenedURL, saveURL, searchExistingURL } from '../handleCreateUrl';
 import { deleteURL } from './utils/utils';
 
 dotenv.config();
