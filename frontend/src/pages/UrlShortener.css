@@ -1,0 +1,32 @@
+.output-container {
+    background-color: transparent;
+    height: 40%;
+}
+
+.input-container {
+    max-width: 450px;
+    height: 400px;
+    min-width: 351px;
+}
+
+.output-card {
+    background-color: white;
+}
+
+.url-shortener {
+    background-color: #C1E1C1;
+    /* background: linear-gradient(to bottom, white 50%, var(--bs-blue) 50% ); */
+}
+
+.input-card {
+    width: 90%;
+}
+
+.text-box {
+    height: 50px;
+}
+
+.typed {
+    font-size: 30px;
+    font-weight: bold;
+}
