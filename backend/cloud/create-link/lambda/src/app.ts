@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as dotenv from "dotenv";
 import { connect, connection } from "mongoose";
-import { handleCreateURL } from './util/handleCreateUrl';
-import { responseBuilder } from './util/responseBuilder';
+import { handleCreateURL } from "./util/handleCreateUrl";
+import { responseBuilder } from "./util/responseBuilder";
 
 dotenv.config();
 const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI;
@@ -24,6 +24,10 @@ export const lambdaHandler = async (
     }
   } catch (error) {
     console.log(error);
-    return responseBuilder(500, error.message);
+    return error.isAxiosError
+      ? responseBuilder(500, "Invalid URL")
+      : error.message
+      ? responseBuilder(500, error.message)
+      : responseBuilder(500, "Unexpected Error");
   }
 };

@@ -10,7 +10,11 @@ router.post("/create-link", async (req, res, next) => {
     return res.status(200).send({ shortenedURL: result });
   } catch (error) {
     console.log(error);
-    return res.status(500).send(error);
+    return error.isAxiosError
+      ? res.status(500).send("Invalid URL")
+      : error.message
+      ? res.status(500).send(error.message)
+      : res.status(500).send("Unexpected Error");
   }
 });
 
