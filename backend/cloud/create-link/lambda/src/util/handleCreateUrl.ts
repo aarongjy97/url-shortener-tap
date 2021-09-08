@@ -1,6 +1,6 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import axios from "axios";
-import md5 from "md5";
+import { enc, SHA256 } from 'crypto-js';
 import moment from "moment";
 import { Document } from "mongoose";
 import { URL, URLModel } from "../schema/URL";
@@ -83,7 +83,7 @@ export async function deconflictURL(
 }
 
 export function generateShortenedURL(url: string): string {
-  return md5(url).substring(0, 6);
+  return enc.Base64.stringify(SHA256(url)).substring(0, 8);
 }
 
 export async function searchExistingURL(
