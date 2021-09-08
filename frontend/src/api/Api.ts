@@ -3,8 +3,8 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-// const API_GATEWAY = process.env.REACT_APP_CLOUD_API
-const API_GATEWAY = process.env.REACT_APP_LOCAL_API;
+const API_GATEWAY = process.env.REACT_APP_CLOUD_API
+// const API_GATEWAY = process.env.REACT_APP_LOCAL_API;
 
 interface URLResponse {
   shortenedUrl: string;
@@ -12,6 +12,7 @@ interface URLResponse {
 }
 
 export async function generateURL(url: string, customUrl: string): Promise<URLResponse> {
+  console.log(API_GATEWAY)
   const response = await axios.post(`${API_GATEWAY}/create-link`, {
     url: url,
     customUrl: customUrl
