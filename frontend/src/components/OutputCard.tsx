@@ -1,34 +1,46 @@
-import { faCopy, faLink } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown, faCheckCircle,
+  faCopy,
+  faLink
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Fade from "react-reveal/Fade";
+import Jump from "react-reveal/Jump";
 
 interface OutputCardProps {
   shortenedUrl: string;
   url: string;
   showOutput: boolean;
+  fullShortenedUrl: string;
   refreshStates: () => void;
 }
 
 export default function OutputCard(props: OutputCardProps) {
-  const { shortenedUrl, url, showOutput, refreshStates } = props;
+  const { shortenedUrl, url, showOutput, refreshStates, fullShortenedUrl } = props;
   const [copied, setCopied] = useState<boolean>(false);
 
   return (
-    <Fade top when={showOutput}>
+    <Jump top when={showOutput}>
       {showOutput && (
         <div
           style={{ zIndex: 1 }}
-          className="input-container position-absolute w-100"
+          className="output-container position-absolute w-100"
         >
-          <div className="h-100 w-100 d-flex align-items-center justify-content-center flex-column bg-white shadow rounded">
+          <div className="h-100 w-100 d-flex align-items-center justify-content-center flex-column shadow rounded">
+              <div className="output-container-header input-card py-2 d-flex justify-content-center">
+                <span>
+                  <FontAwesomeIcon className="me-2" icon={faCheckCircle} />
+                  Success
+                </span>
+              </div>
+
             <div className="input-card py-2">
               <Form.Label className="w-100 justify-content-start">
                 <span>
                   <FontAwesomeIcon className="me-1" icon={faLink} />
-                  Original URL
+                  Your Original URL
                 </span>
               </Form.Label>
               <InputGroup className="w-100">
@@ -37,6 +49,7 @@ export default function OutputCard(props: OutputCardProps) {
                   value={url}
                   type="url"
                   readOnly
+                  disabled
                 />
                 <CopyToClipboard
                   text={url}
@@ -47,11 +60,15 @@ export default function OutputCard(props: OutputCardProps) {
                     }, 3000);
                   }}
                 >
-                  <Button variant="success">
+                  <Button variant="primary">
                     <FontAwesomeIcon icon={faCopy} />
                   </Button>
                 </CopyToClipboard>
               </InputGroup>
+            </div>
+
+            <div className="input-card output-container-header d-flex justify-content-center py-2">
+              <FontAwesomeIcon className="me-1" icon={faArrowDown}/>
             </div>
 
             <div className="input-card py-2">
@@ -62,6 +79,9 @@ export default function OutputCard(props: OutputCardProps) {
                 </span>
               </Form.Label>
               <InputGroup className="w-100">
+                <InputGroup.Text>
+                  <span>short.ly/</span>
+                </InputGroup.Text>
                 <Form.Control
                   className="text-box"
                   value={shortenedUrl}
@@ -69,7 +89,7 @@ export default function OutputCard(props: OutputCardProps) {
                   readOnly
                 />
                 <CopyToClipboard
-                  text={shortenedUrl}
+                  text={fullShortenedUrl}
                   onCopy={() => {
                     setCopied(true);
                     setTimeout(() => {
@@ -77,7 +97,7 @@ export default function OutputCard(props: OutputCardProps) {
                     }, 3000);
                   }}
                 >
-                  <Button variant="success">
+                  <Button variant="primary">
                     <FontAwesomeIcon icon={faCopy} />
                   </Button>
                 </CopyToClipboard>
@@ -92,17 +112,21 @@ export default function OutputCard(props: OutputCardProps) {
 
             <div className="input-card py-2 d-flex justify-content-center flex-row align-items-center">
               <Button
-                variant="success"
+                variant="primary"
+                className="me-2"
                 onClick={(e) => {
                   refreshStates();
                 }}
               >
                 <span>Generate another link</span>
               </Button>
+              <Button variant="primary" target="_blank" href={fullShortenedUrl}>
+                <span>Goto Link</span>
+              </Button>
             </div>
           </div>
         </div>
       )}
-    </Fade>
+    </Jump>
   );
 }

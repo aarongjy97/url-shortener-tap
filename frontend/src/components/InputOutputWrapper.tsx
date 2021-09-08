@@ -13,6 +13,7 @@ export default function InputOutputWrapper() {
   const [url, setUrl] = useState<string>("");
   const [customUrl, setCustomUrl] = useState<string>("");
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
+  const [fullShortenedUrl, setFullShortenedUrl] = useState<string>("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,21 +22,25 @@ export default function InputOutputWrapper() {
     setErrorMessage("");
 
     try {
-      const shortenedUrl = await generateURL(url);
-      setShortenedUrl(shortenedUrl);
+      const urlResponse = await generateURL(url, customUrl);
+      setShortenedUrl(urlResponse.shortenedUrl);
+      setFullShortenedUrl(urlResponse.fullShortenedUrl);
       setShowOutput(true);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response);
         setErrorMessage(error.response?.data);
         setIsInvalid(true);
-        setTimeout(() => {
-          setErrorMessage("");
-          setIsInvalid(false);
-        }, 2000);
       }
     } finally {
       setSubmitted(false);
+    }
+  }
+
+  function refreshErrors() {
+    if (isInvalid) {
+      setErrorMessage("");
+      setIsInvalid(false);
     }
   }
 
@@ -58,6 +63,7 @@ export default function InputOutputWrapper() {
     >
       <OutputCard
         shortenedUrl={shortenedUrl}
+        fullShortenedUrl={fullShortenedUrl}
         url={url}
         showOutput={showOutput}
         refreshStates={refreshStates}
@@ -72,6 +78,7 @@ export default function InputOutputWrapper() {
         customUrl={customUrl}
         setCustomUrl={setCustomUrl}
         errorMessage={errorMessage}
+        refreshErrors={refreshErrors}
       />
     </Col>
   );

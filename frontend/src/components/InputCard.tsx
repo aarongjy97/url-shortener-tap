@@ -12,6 +12,7 @@ interface InputCardProps {
   customUrl: string;
   setCustomUrl: React.Dispatch<React.SetStateAction<string>>;
   errorMessage: string;
+  refreshErrors: () => void;
 }
 
 export default function InputCard(props: InputCardProps) {
@@ -23,7 +24,8 @@ export default function InputCard(props: InputCardProps) {
     setUrl,
     customUrl,
     setCustomUrl,
-    errorMessage
+    errorMessage,
+    refreshErrors
   } = props;
 
   return (
@@ -44,6 +46,7 @@ export default function InputCard(props: InputCardProps) {
             isInvalid={isInvalid}
             onChange={(e) => {
               setUrl(e.target.value);
+              refreshErrors();
             }}
           />
         </Form.Group>
@@ -62,6 +65,7 @@ export default function InputCard(props: InputCardProps) {
             isInvalid={isInvalid}
             onChange={(e) => {
               setCustomUrl(e.target.value);
+              refreshErrors();
             }}
           />
           <Form.Control.Feedback type="invalid">
@@ -70,7 +74,7 @@ export default function InputCard(props: InputCardProps) {
         </Form.Group>
         <div className="pt-3 d-flex justify-content-center">
           <Button
-            variant="success"
+            variant="primary"
             disabled={submitted || url.length < 1}
             type="submit"
           >

@@ -1,6 +1,14 @@
 .output-container {
-    background-color: transparent;
-    height: 40%;
+    max-width: 450px;
+    height: 400px;
+    min-width: 351px;
+    /* background-color: #abc4e7; */
+    background-color: #c6dbf1;
+}
+
+.output-container-header {
+    font-size: 30px;
+    color: var(--bs-blue)
 }
 
 .input-container {
@@ -14,7 +22,8 @@
 }
 
 .url-shortener {
-    background-color: #C1E1C1;
+    /* background-color: #C1E1C1; */
+    background-color: #c6dbf1;
     /* background: linear-gradient(to bottom, white 50%, var(--bs-blue) 50% ); */
 }
 
