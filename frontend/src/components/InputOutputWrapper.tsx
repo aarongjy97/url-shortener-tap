@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
-import { generateURLSql } from "../api/Api";
+import { generateURL } from "../api/Api";
 import InputCard from "./InputCard";
 import OutputCard from "./OutputCard";
 
@@ -22,7 +22,7 @@ export default function InputOutputWrapper() {
     setErrorMessage("");
 
     try {
-      const urlResponse = await generateURLSql(url, customUrl);
+      const urlResponse = await generateURL(url, customUrl);
       setShortenedUrl(urlResponse.shortenedUrl);
       setFullShortenedUrl(urlResponse.fullShortenedUrl);
       setShowOutput(true);
