@@ -11,7 +11,7 @@ dotenv.config();
 describe("URL Shortener Tests", () => {
 
   it("Test generation of short URL", () => {
-    const hash = "8f69b3";
+    const hash = "qiGyPICG";
     const url = "http://govtech.com.sg/";
     const shortURL = generateShortenedURL(url);
     expect(hash).toBe(shortURL);
@@ -43,7 +43,7 @@ describe("URL Shortener Tests", () => {
     describe("Test deconflicting of url", () => {
       const conflict = "http://govtech.com.sg/conflict";
       const url = "http://govtech.com.sg/";
-      const newHash = "c60183";
+      const newHash = generateShortenedURL(url + url);
 
       it("Save hash with different original URL", async () => {
         try {
@@ -89,8 +89,8 @@ describe("URL Shortener Tests", () => {
     describe("Test deconflicting of url twice", () => {
       const conflict = "http://govtech.com.sg/conflict";
       const url = "http://govtech.com.sg/";
-      const newHash1 = "c60183";
-      const newHash2 = "914e68";
+      const newHash1 = generateShortenedURL(url + url);
+      const newHash2 = generateShortenedURL(url + url + url);
 
       it("Save original hash with different original URL", async () => {
         try {
@@ -153,8 +153,8 @@ describe("URL Shortener Tests", () => {
     describe("Creating existing URL, with 2 conflicts", () => {
       const conflict = "http://govtech.com.sg/conflict";
       const url = "http://govtech.com.sg/";
-      const newHash1 = "c60183";
-      const newHash2 = "914e68";
+      const newHash1 = generateShortenedURL(url + url);
+      const newHash2 = generateShortenedURL(url + url + url);
 
       it("Creation of 2 conflicts and original", async () => {
         try {
@@ -218,10 +218,10 @@ describe("URL Shortener Tests", () => {
 
       it("Save URL with resolvable endpoint", async () => {
         try {
-          const expected = 'c7b920';
           const data = {
             url: 'http://google.com'
           }
+          const expected = generateShortenedURL(data.url);
 
           const result = await handleCreateURLSql(data);
           expect(result).toBe(expected);
@@ -236,7 +236,7 @@ describe("URL Shortener Tests", () => {
       })
 
       it("Cleanup save URL with resolvable endpoint", async () => {
-        const expected = 'c7b920';
+        const expected = generateShortenedURL('http://google.com');
         await deleteURL(expected);
         const result = await searchExistingURL(expected);
         expect(result).toBeUndefined();

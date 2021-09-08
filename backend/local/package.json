@@ -5,6 +5,7 @@
     },
     "dependencies": {
         "@types/cors": "^2.8.12",
+        "@types/crypto-js": "^4.0.2",
         "@types/dotenv": "^8.2.0",
         "@types/md5": "^2.3.1",
         "@types/morgan": "^1.9.3",
@@ -12,6 +13,7 @@
         "axios": "^0.21.3",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
         "debug": "^4.3.2",
         "dotenv": "^9.0.2",
         "express": "^4.17.1",
