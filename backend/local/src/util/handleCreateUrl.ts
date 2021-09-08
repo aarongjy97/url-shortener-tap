@@ -81,7 +81,7 @@ export async function searchExistingURL(
   return await URLModel.findOne({ shortenedURL: shortenedURL }).exec();
 }
 
-export async function saveURL(shortenedURL: string, originalURL: string) {
+export async function saveURL(shortenedURL: string, originalURL: string): Promise<void> {
   const url: URL = {
     shortenedURL: shortenedURL,
     originalURL: originalURL,

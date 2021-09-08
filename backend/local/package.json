@@ -1,12 +1,14 @@
 {
     "scripts": {
-        "start": "nodemon ./src/index.ts"
+        "start": "nodemon ./src/index.ts",
+        "test": "jest --detectOpenHandles"
     },
     "dependencies": {
         "@types/cors": "^2.8.12",
         "@types/dotenv": "^8.2.0",
         "@types/md5": "^2.3.1",
         "@types/morgan": "^1.9.3",
+        "@types/pg": "^8.6.1",
         "axios": "^0.21.3",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
@@ -17,12 +19,19 @@
         "md5": "^2.3.0",
         "moment": "^2.29.1",
         "mongoose": "^6.0.4",
-        "morgan": "^1.10.0"
+        "morgan": "^1.10.0",
+        "pg": "^8.7.1"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@babel/preset-env": "^7.15.0",
         "@types/express": "^4.17.11",
+        "@types/jest": "^27.0.1",
         "@types/node": "^15.0.2",
+        "babel-jest": "^27.1.0",
+        "jest": "^27.1.0",
         "nodemon": "^2.0.7",
+        "ts-jest": "^27.0.5",
         "ts-node": "^9.1.1",
         "typescript": "^4.2.4"
     }
